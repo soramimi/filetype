@@ -31,6 +31,8 @@ SOURCES += main.cpp \
 	file/src/funcs.c \
 	file/src/getline.c \
 	file/src/gmtime_r.c \
+	file/src/is_csv.c \
+	file/src/is_json.c \
 	file/src/is_tar.c \
 	file/src/localtime_r.c \
 	file/src/magic.c \

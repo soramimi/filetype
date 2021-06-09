@@ -2,6 +2,7 @@
 #include <magic.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <memory>
 
 #ifdef _WIN32
 #include <io.h>
@@ -12,7 +13,8 @@
 
 int main(void)
 {
-	char const *mgcfile = "../misc/magic.mgc";
+//	char const *mgcfile = "../misc/magic.mgc";
+	char const *mgcfile = "../docker/magic.mgc";
 #ifdef _WIN32
 	char *actual_file = "filetype.exe";
 #else
@@ -29,11 +31,31 @@ int main(void)
 		return 1;
 	}
 
+#if 0
 	if (magic_load(magic_cookie, mgcfile) != 0) {
 		printf("cannot load magic database - %s\n", magic_error(magic_cookie));
 		magic_close(magic_cookie);
 		return 1;
 	}
+#else
+	std::unique_ptr<char[]> mgcdata;
+	{
+		int fd = open(mgcfile, O_RDONLY);
+		if (fd != -1) {
+			struct stat st;
+			if (fstat(fd, &st) == 0 && st.st_size > 0) {
+				mgcdata.reset(new char[st.st_size]);
+				read(fd, mgcdata.get(), st.st_size);
+				void *bufs[1];
+				size_t sizes[1];
+				bufs[0] = mgcdata.get();
+				sizes[0] = st.st_size;
+				magic_load_buffers(magic_cookie, bufs, sizes, 1);
+			}
+			close(fd);
+		}
+	}
+#endif
 
 #if 0
 	magic_full = magic_file(magic_cookie, actual_file);

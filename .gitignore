@@ -84,3 +84,4 @@ $RECYCLE.BIN/
 build/
 *.user
 _bin/
+docker/magic.mgc
