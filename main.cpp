@@ -13,8 +13,7 @@
 
 int main(void)
 {
-//	char const *mgcfile = "../misc/magic.mgc";
-	char const *mgcfile = "../docker/magic.mgc";
+	char const *mgcfile = "../misc/magic.mgc";
 #ifdef _WIN32
 	char *actual_file = "filetype.exe";
 #else
