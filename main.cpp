@@ -19,7 +19,7 @@ int main(void)
 #ifdef _WIN32
 	char const *actual_file = "filetype.exe";
 #else
-	char *actual_file = "filetype";
+	char const *actual_file = "filetype";
 #endif
 
 	const char *magic_full;
