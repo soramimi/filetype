@@ -1,4 +1,6 @@
 
+// minimul unistd.h
+
 #ifdef _WIN32
 
 #ifndef _UNISTD_H
@@ -74,5 +76,21 @@ typedef unsigned int mode_t;
 #endif /* unistd.h  */
 
 #else // _WIN32
-#include <unistd.h>
+// #include <unistd.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define STDIN_FILENO    0       /* Standard input.  */
+#define STDOUT_FILENO   1       /* Standard output.  */
+#define STDERR_FILENO   2       /* Standard error output.  */
+extern ssize_t read (int __fd, void *__buf, size_t __nbytes);
+extern ssize_t write (int __fd, const void *__buf, size_t __n);
+extern int close (int __fd);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif
