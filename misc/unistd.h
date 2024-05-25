@@ -6,12 +6,14 @@
 
 #ifdef _WIN32
 
+#pragma comment(lib, "shlwapi") // for PathRemoveFileSpec function
+
 #define R_OK    4
 #define W_OK    2
 #define STDIN_FILENO 0
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2
-typedef signed __int64 ssize_t;
+//typedef signed __int64 ssize_t;
 typedef unsigned int mode_t;
 
 /* Block device */

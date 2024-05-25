@@ -226,7 +226,7 @@
 
 /* Define to 1 or 0, depending whether the compiler supports simple visibility
    declarations. */
-#undef HAVE_VISIBILITY
+// #define HAVE_VISIBILITY 1
 
 /* Define to 1 if you have the <wchar.h> header file. */
 #define HAVE_WCHAR_H 1

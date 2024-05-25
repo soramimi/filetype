@@ -1,5 +1,6 @@
+TARGET = filetypelib
 TEMPLATE = lib
-CONFIG += staticlib c++11
+CONFIG +=  staticlib console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 

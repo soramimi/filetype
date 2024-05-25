@@ -85,3 +85,4 @@ build/
 *.user
 _bin/
 docker/magic.mgc
+.vs/
