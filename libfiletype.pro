@@ -1,6 +1,6 @@
-TARGET = filetypelib
+TARGET = filetype
 TEMPLATE = lib
-CONFIG +=  staticlib console c++11
+CONFIG += staticlib console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
@@ -9,9 +9,9 @@ DESTDIR = $$PWD/_bin
 INCLUDEPATH += misc
 INCLUDEPATH += file/src
 INCLUDEPATH += pcre2/src
-win32:INCLUDEPATH += dirent/include
-win32:QMAKE_CFLAGS += /FI unistd.h
-win32:LIBS += -lshlwapi
+# win32:INCLUDEPATH += dirent/include
+# win32:QMAKE_CFLAGS += /FI unistd.h
+# win32:LIBS += -lshlwapi
 
 DEFINES += "HAVE_CONFIG_H=1" "_SSIZE_T_DEFINED=1" "PCRE2_CODE_UNIT_WIDTH=8"
 
