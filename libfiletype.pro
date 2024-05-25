@@ -14,6 +14,7 @@ INCLUDEPATH += pcre2/src
 # win32:LIBS += -lshlwapi
 
 DEFINES += "HAVE_CONFIG_H=1" "_SSIZE_T_DEFINED=1" "PCRE2_CODE_UNIT_WIDTH=8"
+!win32:DEFINES += "HAVE_MKSTEMP=1"
 
 win32:HEADERS += dirent.h
 
