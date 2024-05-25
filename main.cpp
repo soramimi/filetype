@@ -11,11 +11,13 @@
 #include <unistd.h>
 #endif
 
+#include "magic.h"
+
 int main(void)
 {
 	char const *mgcfile = "../misc/magic.mgc";
 #ifdef _WIN32
-	char *actual_file = "filetype.exe";
+	char const *actual_file = "filetype.exe";
 #else
 	char *actual_file = "filetype";
 #endif

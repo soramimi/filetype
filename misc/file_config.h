@@ -96,7 +96,7 @@
 #undef HAVE_MKOSTEMP
 
 /* Define to 1 if you have the `mkstemp' function. */
-#define HAVE_MKSTEMP 1
+// #define HAVE_MKSTEMP 1
 
 /* Define to 1 if you have a working `mmap' system call. */
 #undef HAVE_MMAP
