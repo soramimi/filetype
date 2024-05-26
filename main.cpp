@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <memory>
+#include <algorithm>
 
 #ifdef _WIN32
 #include <io.h>
@@ -17,7 +18,8 @@ int main(void)
 {
 	char const *mgcfile = "../misc/magic.mgc";
 #ifdef _WIN32
-	char const *actual_file = "filetype.exe";
+	char const *actual_file = "C:/develop/Guitar/src/AddRepositoryDialog.cpp";
+
 #else
 	char const *actual_file = "filetype";
 #endif
@@ -63,11 +65,12 @@ int main(void)
 #else
 	magic_full = NULL;
 	char tmp[65536];
-	int fd = open(actual_file, O_RDONLY);
+	int fd = open(actual_file, O_RDONLY | O_BINARY);
 	if (fd != -1) {
 		int n = read(fd, tmp, sizeof(tmp));
 		if (n > 0) {
-			magic_full = magic_buffer(magic_cookie, tmp, sizeof(tmp));
+			n = std::min(n, (int)sizeof(tmp));
+			magic_full = magic_buffer(magic_cookie, tmp, n);
 		}
 	}
 #endif

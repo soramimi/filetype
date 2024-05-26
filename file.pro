@@ -9,10 +9,30 @@ INCLUDEPATH += misc
 INCLUDEPATH += file/src
 INCLUDEPATH += pcre2/src
 win32:INCLUDEPATH += dirent/include
+win32:QMAKE_CFLAGS += /FI unistd.h
 
 DEFINES += "HAVE_CONFIG_H=1" "_SSIZE_T_DEFINED=1" "PCRE2_CODE_UNIT_WIDTH=8"
+win32:DEFINES += "_WIN32"
 
-SOURCES += file/src/file.c \
+win32:HEADERS += dirent.h
+win32:HEADERS += misc/unistd.h
+
+HEADERS += \
+	file/src/cdf.h \
+	file/src/der.h \
+	file/src/elfclass.h \
+	file/src/file.h \
+	file/src/file_opts.h \
+	file/src/mygetopt.h \
+	file/src/readelf.h \
+	file/src/tar.h \
+	pcre2/src/pcre2_internal.h \
+	pcre2/src/pcre2_intmodedep.h \
+	pcre2/src/pcre2_ucp.h \
+	pcre2/src/pcre2posix.h \
+	pcre2/src/regex.h
+
+SOURCES += \
 	file/src/apprentice.c \
 	file/src/apptype.c \
 	file/src/ascmagic.c \
@@ -26,10 +46,12 @@ SOURCES += file/src/file.c \
 	file/src/der.c \
 	file/src/dprintf.c \
 	file/src/encoding.c \
+	file/src/file.c \
 	file/src/fmtcheck.c \
 	file/src/fsmagic.c \
 	file/src/funcs.c \
 	file/src/getline.c \
+	file/src/getopt_long.c \
 	file/src/gmtime_r.c \
 	file/src/is_csv.c \
 	file/src/is_json.c \
@@ -76,29 +98,5 @@ SOURCES += file/src/file.c \
 	pcre2/src/pcre2_ucd.c \
 	pcre2/src/pcre2_valid_utf.c \
 	pcre2/src/pcre2_xclass.c \
-	pcre2/src/pcre2posix.c
-
-HEADERS += \
-	file/src/cdf.h \
-	file/src/der.h \
-	file/src/elfclass.h \
-	file/src/file.h \
-	file/src/file_opts.h \
-	file/src/magic.h \
-	file/src/magic.h \
-	file/src/patchlevel.h \
-	file/src/readelf.h \
-	file/src/tar.h \
-	misc/config.h \
-	misc/file_config.h \
-	misc/my_unistd.h \
-	misc/pcre2.h \
-	misc/pcre2_config.h \
-	pcre2/src/pcre2_internal.h \
-	pcre2/src/pcre2_intmodedep.h \
-	pcre2/src/pcre2_ucp.h \
-	pcre2/src/pcre2posix.h \
-	pcre2/src/regex.h
-
-win32:HEADERS += dirent.h
+	pcre2/src/pcre2posix.c \
 
