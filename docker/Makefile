@@ -1,12 +1,11 @@
 
-up:
-	docker-compose up
+all:
 
 build:
-	docker-compose build
+	docker build . -t file
 
-bash:
-	docker exec -it file /bin/bash
+run:
+	docker run -it -v ./:/root/docker file
 
 clean:
 	rm -f file magic.mgc libmagic.so

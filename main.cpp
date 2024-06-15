@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #else
 #include <unistd.h>
+#define O_BINARY 0
 #endif
 
 #include "magic.h"
