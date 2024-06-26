@@ -1,26 +1,17 @@
 #ifndef FILETYPE_H
 #define FILETYPE_H
 
-#include <magic.h>
 #include <string>
-#include <QByteArray>
+#include <memory>
 
 class FileType {
 private:
-	QByteArray mgcdata_;
-	magic_t magic_cookie = nullptr;
+	void *magic_cookie = nullptr;
+	std::unique_ptr<char[]> mgcdata;
 public:
-	FileType()
-	{
-//		open(); // このインスタンスを作成した側でopen()を呼ぶこと
-	}
-	~FileType()
-	{
-		close();
-	}
-	bool open();
+	bool open(char const *mgcfile);
 	void close();
-	std::string mime_by_data(char const *bin, int len);
+	std::string mime(char const *filepath) const;
 };
 
 #endif // FILETYPE_H
