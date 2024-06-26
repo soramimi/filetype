@@ -1,45 +1,103 @@
-
-#include "filetype.h"
+#include "FileType.h"
+#include <stdio.h>
 #include <magic.h>
-#include <QDebug>
-#include <QFile>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <memory>
+#include <vector>
+#include <algorithm>
 
-bool FileType::open()
+#ifdef _WIN32
+#define NOMINMAX
+#include <io.h>
+#include <fcntl.h>
+#else
+#include <unistd.h>
+#define O_BINARY 0
+#endif
+
+#include "magic.h"
+
+
+
+bool FileType::open(const char *mgcfile)
 {
+	if (magic_cookie) return true;
+
+	bool ok = false;
+
+	// char const *mgcfile = "../misc/magic.mgc";
+
 	magic_cookie = magic_open(MAGIC_MIME);
 
-	if (magic_cookie == nullptr) {
+	if (!magic_cookie) {
 		fprintf(stderr, "unable to initialize magic library\n");
-		return false;
+	} else {
+#if 0
+		if (magic_load(magic_cookie, mgcfile) != 0) {
+			printf("cannot load magic database - %s\n", magic_error(magic_cookie));
+			magic_close(magic_cookie);
+			return 1;
+		}
+#else
+		int fd = ::open(mgcfile, O_RDONLY);
+		if (fd != -1) {
+			struct stat st;
+			if (fstat(fd, &st) == 0 && st.st_size > 0) {
+				mgcdata.reset(new char[st.st_size]);
+				read(fd, mgcdata.get(), st.st_size);
+				void *bufs[1];
+				size_t sizes[1];
+				bufs[0] = mgcdata.get();
+				sizes[0] = st.st_size;
+				if (magic_load_buffers((magic_t)magic_cookie, bufs, sizes, 1) == 0) {
+					ok = true;
+				}
+			}
+			::close(fd);
+		}
+#endif
 	}
-
-	QFile file(":/filemagic/magic.mgc"); // load magic from resource
-	file.open(QFile::ReadOnly);
-	mgcdata_ = file.readAll();
-	void *bufs[1];
-	size_t sizes[1];
-	bufs[0] = mgcdata_.data();
-	sizes[0] = mgcdata_.size();
-	auto r = magic_load_buffers(magic_cookie, bufs, sizes, 1);
-	return r == 0;
+	return ok;
 }
 
 void FileType::close()
 {
 	if (magic_cookie) {
-		magic_close(magic_cookie);
+		magic_close((magic_t)magic_cookie);
 		magic_cookie = nullptr;
 	}
 }
 
-std::string FileType::mime_by_data(const char *bin, int len)
+std::string FileType::mime(const char *filepath) const
 {
-	auto *p = magic_buffer(magic_cookie, bin, len);
-	std::string s;
-	if (p) s = p;
-	auto i = s.find(';');
-	if (i != std::string::npos) {
-		s = s.substr(0, i);
+	if (!magic_cookie) return {};
+
+	std::string mime;
+
+#if 0
+	mime = magic_file(magic_cookie, filepath);
+#else
+	int fd = ::open(filepath, O_RDONLY | O_BINARY);
+	if (fd != -1) {
+		struct stat st;
+		if (fstat(fd, &st) == 0) {
+			std::vector<char> data(std::max((size_t)65536, (size_t)st.st_size));
+			int n = read(fd, data.data(), data.size());
+			if (n > 0) {
+				mime = magic_buffer((magic_t)magic_cookie, data.data(), n);
+			}
+		}
+		::close(fd);
 	}
-	return s;
+#endif
+
+	if (mime.empty()) return {};
+
+	char const *p = mime.c_str();
+	char const *q = strchr(p, ';');
+	if (q) {
+		mime = mime.substr(0, q - p);
+	}
+	return mime;
 }
