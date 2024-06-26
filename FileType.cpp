@@ -1,6 +1,6 @@
 #include "FileType.h"
 #include <stdio.h>
-#include <magic.h>
+#include "misc/magic.h"
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <memory>
@@ -22,8 +22,6 @@ bool FileType::open(const char *mgcfile)
 	if (magic_cookie) return true;
 
 	bool ok = false;
-
-	// char const *mgcfile = "../misc/magic.mgc";
 
 	magic_cookie = magic_open(MAGIC_MIME);
 
@@ -80,7 +78,7 @@ std::string FileType::mime(const char *filepath) const
 		struct stat st;
 		if (fstat(fd, &st) == 0) {
 			size_t size = st.st_size;
-			// size = std::min((size_t)65536, size);
+			size = std::min((size_t)65536, size);
 			std::vector<char> data(size);
 			size = read(fd, data.data(), size);
 			if (size > 0) {

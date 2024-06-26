@@ -90,8 +90,6 @@ HEADERS += \
 	file/src/elfclass.h \
 	file/src/file.h \
 	file/src/file_opts.h \
-	file/src/magic.h \
-	file/src/magic.h \
 	file/src/patchlevel.h \
 	file/src/readelf.h \
 	file/src/tar.h \
