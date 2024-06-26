@@ -16,3 +16,4 @@ SOURCES += main.cpp \
 
 HEADERS += \
 	FileType.h
+

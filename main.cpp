@@ -20,7 +20,7 @@ int main(void)
 #ifdef _WIN32
 		char const *filepath = "filetype.exe";
 #else
-		char const *filepath = "filetype";
+		char const *filepath = "/home/soramimi/develop/filetype/_bin/filetype";
 #endif
 
 	FileType ft;

@@ -99,7 +99,6 @@ HEADERS += \
 	misc/file_config.h \
 	misc/pcre2.h \
 	misc/pcre2_config.h \
-	misc/unistd.h \
 	pcre2/src/pcre2_internal.h \
 	pcre2/src/pcre2_intmodedep.h \
 	pcre2/src/pcre2_ucp.h \
