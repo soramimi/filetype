@@ -7,9 +7,10 @@ CONFIG -= qt
 DESTDIR = $$PWD/_bin
 
 INCLUDEPATH += misc
+INCLUDEPATH += misc/win32
 INCLUDEPATH += file/src
 INCLUDEPATH += pcre2/src
-# win32:INCLUDEPATH += dirent/include
+win32:INCLUDEPATH += dirent/include
 # win32:QMAKE_CFLAGS += /FI unistd.h
 # win32:LIBS += -lshlwapi
 
