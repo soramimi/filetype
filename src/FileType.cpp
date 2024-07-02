@@ -406,10 +406,13 @@ FileType::Result FileType::file(int fd) const
 	std::string mime;
 
 	if (fd != -1) {
+		auto pos = lseek(fd, 0, SEEK_CUR);
+		lseek(fd, 0, SEEK_SET);
 		struct stat st;
 		if (fstat(fd, &st) == 0) {
 			mime = _fd_or_buf((magic_t )magic_set, fd, nullptr, 0, nullptr, false);
 		}
+		lseek(fd, pos, SEEK_SET);
 	}
 
 	return parse_mime(mime.c_str());
