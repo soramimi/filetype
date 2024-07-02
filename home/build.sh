@@ -12,3 +12,5 @@ make -j10
 popd
 
 cp file/magic/magic.mgc _bin/
+
+sh makemgcc.sh

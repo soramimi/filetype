@@ -36,6 +36,7 @@ update:
 	cp home/_bin/libfile.a lib/
 	cp home/_bin/magic.mgc lib/
 	cp home/file/src/magic.h lib/
+	cp home/_bin/magic.mgc src/
 	cp home/FileType.cpp src/
 	cp home/FileType.h src/
 

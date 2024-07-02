@@ -5,7 +5,3 @@ a.out
 _bin/
 _build/
 build/
-home/.bash_history
-home/.container.sh
-home/.password
-home/.viminfo
