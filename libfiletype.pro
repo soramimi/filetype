@@ -6,18 +6,20 @@ CONFIG -= qt
 
 DESTDIR = $$PWD/_bin
 
-INCLUDEPATH += misc
-INCLUDEPATH += misc/win32
-INCLUDEPATH += file/src
-INCLUDEPATH += pcre2/src
-win32:INCLUDEPATH += dirent/include
-# win32:QMAKE_CFLAGS += /FI unistd.h
+INCLUDEPATH += $$PWD/misc
+INCLUDEPATH += $$PWD/file/src
+INCLUDEPATH += $$PWD/pcre2/src
+win32:INCLUDEPATH += $$PWD/dirent/include
+win32:INCLUDEPATH += $$PWD/misc/win32
+# win32:INCLUDEPATH += dirent/include
+win32:QMAKE_CFLAGS += /FI $$PWD/misc/win32/unistd.h
 # win32:LIBS += -lshlwapi
 
 DEFINES += "HAVE_CONFIG_H=1" "_SSIZE_T_DEFINED=1" "PCRE2_CODE_UNIT_WIDTH=8"
 !win32:DEFINES += "HAVE_MKSTEMP=1"
 
 win32:HEADERS += dirent.h
+
 
 SOURCES += \
 	file/src/apprentice.c \
@@ -91,6 +93,8 @@ HEADERS += \
 	file/src/elfclass.h \
 	file/src/file.h \
 	file/src/file_opts.h \
+	file/src/magic.h \
+	file/src/magic.h \
 	file/src/patchlevel.h \
 	file/src/readelf.h \
 	file/src/tar.h \
@@ -98,6 +102,7 @@ HEADERS += \
 	misc/file_config.h \
 	misc/pcre2.h \
 	misc/pcre2_config.h \
+	misc/unistd.h \
 	pcre2/src/pcre2_internal.h \
 	pcre2/src/pcre2_intmodedep.h \
 	pcre2/src/pcre2_ucp.h \

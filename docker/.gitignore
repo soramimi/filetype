@@ -1,0 +1,7 @@
+a.out
+*.o
+*.user
+.qmake.stash
+_bin/
+_build/
+build/
