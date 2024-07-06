@@ -7,7 +7,7 @@ CONFIG -= qt
 DESTDIR = $$PWD/_bin
 
 INCLUDEPATH += misc
-INCLUDEPATH += misc/win32
+win32:INCLUDEPATH += misc/win32
 INCLUDEPATH += file/src
 INCLUDEPATH += pcre2/src
 win32:INCLUDEPATH += dirent/include
