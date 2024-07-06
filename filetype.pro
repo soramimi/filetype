@@ -8,7 +8,8 @@ DESTDIR = $$PWD/_bin
 
 INCLUDEPATH += $$PWD/misc
 
-win32:LIBS += $$PWD/_build/x86_64/Release/filetype.lib
+# win32:LIBS += $$PWD/_build/x86_64/Release/filetype.lib
+win32:LIBS += $$PWD/_bin/filetype.lib
 !win32:LIBS += $$PWD/_bin/libfiletype.a
 
 SOURCES += main.cpp \

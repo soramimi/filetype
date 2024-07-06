@@ -94,7 +94,7 @@ std::string FileType::mime(const char *filepath) const
 	char const *p = mime.c_str();
 	char const *q = strchr(p, ';');
 	if (q) {
-		mime = mime.substr(0, q - p);
+		//mime = mime.substr(0, q - p);
 	}
 	return mime;
 }

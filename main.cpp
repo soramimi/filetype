@@ -15,13 +15,12 @@
 #endif
 
 
-int main(void)
+int main(int argc, char **argv)
 {
-#ifdef _WIN32
-		char const *filepath = "filetype.exe";
-#else
-		char const *filepath = "/home/soramimi/develop/filetype/_bin/filetype";
-#endif
+	char const *filepath = nullptr;
+	if (argc > 1) {
+		filepath = argv[1];
+	}
 
 	FileType ft;
 	ft.open("../misc/magic.mgc");
