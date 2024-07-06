@@ -12,9 +12,11 @@ INCLUDEPATH += $$PWD/misc
 win32:LIBS += $$PWD/_bin/filetype.lib
 !win32:LIBS += $$PWD/_bin/libfiletype.a
 
+!win32:DEFINES += HAVE_STRCASESTR=1
+
 SOURCES += main.cpp \
-	FileType.cpp
+	src/FileType.cpp
 
 HEADERS += \
-	FileType.h
+	src/FileType.h
 
