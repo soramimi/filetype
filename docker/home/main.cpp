@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv)
 {
-	char const *path = "file";
+	char const *path = "a.out";
 	FileType ft;
 	ft.open("magic.mgc");
 	if (0) {

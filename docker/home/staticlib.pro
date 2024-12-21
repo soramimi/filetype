@@ -1,4 +1,4 @@
-DESTDIR = $$PWD/_bin
+DESTDIR = $$PWD
 
 TARGET = file
 TEMPLATE = lib

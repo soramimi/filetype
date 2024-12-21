@@ -1,5 +1,9 @@
-mgcc
-.bash_history
-.container.sh
-.password
-.viminfo
+.*
+!.gitignore
+_bin/
+_build/
+file/
+magic.h
+a.out
+libfile.a
+*.o

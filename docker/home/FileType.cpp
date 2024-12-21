@@ -1,4 +1,5 @@
 #include "FileType.h"
+#include <cstring>
 #include "magic.h"
 #include <algorithm>
 #include <cstring>

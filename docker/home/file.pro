@@ -5,9 +5,9 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= qt
 
-INCLUDEPATH += $$PWD/file $$PWD/file/src
+INCLUDEPATH += $$PWD/file $$PWD/file/src $$PWD/file/magic/
 
-QMAKE_CFLAGS += -include stdint.h -include myconfig.h
+QMAKE_CFLAGS += -include stdint.h -include myfileconfig.h
 
 DEFINES += HAVE_CONFIG_H=1
 
